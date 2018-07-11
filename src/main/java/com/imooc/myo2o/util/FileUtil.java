@@ -6,19 +6,23 @@ import java.util.Date;
 import java.util.Random;
 
 public class FileUtil {
+	//获取文件的分隔符
 	private static String seperator = System.getProperty("file.separator");
 	private static final SimpleDateFormat sDateFormat = new SimpleDateFormat(
 			"yyyyMMddHHmmss"); // 时间格式化的格式
 	private static final Random r = new Random();
 
+	//得到图片的基本地址
 	public static String getImgBasePath() {
 		String os = System.getProperty("os.name");
 		String basePath = "";
 		if (os.toLowerCase().startsWith("win")) {
+			//图片存储在这--最好解决方法：保存到其他服务器
 			basePath = "D:/projectdev/image/";
 		} else {
 			basePath = "/home/xiangzepro/";
 		}
+		//对 / 进行替换
 		basePath = basePath.replace("/", seperator);
 		return basePath;
 	}
@@ -41,9 +45,10 @@ public class FileUtil {
 		return personInfoImagePath;
 	}
 
+	//获取店铺图片子路径
 	public static String getShopImagePath(long shopId) {
 		StringBuilder shopImagePathBuilder = new StringBuilder();
-		shopImagePathBuilder.append("/upload/images/item/shop/");
+		shopImagePathBuilder.append("upload/images/item/shop/");
 		shopImagePathBuilder.append(shopId);
 		shopImagePathBuilder.append("/");
 		String shopImagePath = shopImagePathBuilder.toString().replace("/",
@@ -53,7 +58,7 @@ public class FileUtil {
 
 	public static String getRandomFileName() {
 		// 生成随机文件名：当前年月日时分秒+五位随机数（为了在实际项目中防止文件同名而进行的处理）
-		int rannum = (int) (r.nextDouble() * (99999 - 10000 + 1)) + 10000; // 获取随机数
+		int rannum = (r.nextInt() * (99999 - 10000 + 1)) + 10000; // 获取随机数
 		String nowTimeStr = sDateFormat.format(new Date()); // 当前时间
 		return nowTimeStr + rannum;
 	}
