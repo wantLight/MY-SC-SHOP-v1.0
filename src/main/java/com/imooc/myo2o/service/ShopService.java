@@ -2,6 +2,7 @@ package com.imooc.myo2o.service;
 
 import com.imooc.myo2o.entity.Shop;
 import com.imooc.myo2o.vo.ShopExecution;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
 

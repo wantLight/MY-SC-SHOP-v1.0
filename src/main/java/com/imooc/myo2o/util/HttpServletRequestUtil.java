@@ -2,10 +2,11 @@ package com.imooc.myo2o.util;
 
 import javax.servlet.http.HttpServletRequest;
 
+//接受并转化相应的参数
 public class HttpServletRequestUtil {
 	public static int getInt(HttpServletRequest request, String name) {
-
 		try {
+			//将name转换成int
 			return Integer.decode(request.getParameter(name));
 		} catch (Exception e) {
 			return -1;
@@ -45,8 +46,9 @@ public class HttpServletRequestUtil {
 			if (result != null) {
 				result = result.trim();
 			}
-			if ("".equals(result))
+			if ("".equals(result)){
 				result = null;
+			}
 			return result;
 		} catch (Exception e) {
 			return null;

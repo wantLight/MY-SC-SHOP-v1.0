@@ -12,7 +12,9 @@ $(function() {
 		editShopUrl = '/myo2o/shop/modifyshop';
 	}
 
+	//获取店铺基本信息
 	function getInfo(shopId) {
+		//获取JSON参数信息
 		$.getJSON(shopInfoUrl, function(data) {
 			if (data.success) {
 				var shop = data.shop;
@@ -24,6 +26,7 @@ $(function() {
 						+ shop.shopCategory.shopCategoryId + '" selected>'
 						+ shop.shopCategory.shopCategoryName + '</option>';
 				var tempAreaHtml = '';
+				//新版JQUERY写法
 				data.areaList.map(function(item, index) {
 					tempAreaHtml += '<option data-id="' + item.areaId + '">'
 							+ item.areaName + '</option>';
@@ -71,6 +74,7 @@ $(function() {
 		shop.shopDesc = $('#shop-desc').val();
 
 		shop.shopCategory = {
+			//.not 被选出来的
 			shopCategoryId : $('#shop-category').find('option').not(function() {
 				return !this.selected;
 			}).data('id')

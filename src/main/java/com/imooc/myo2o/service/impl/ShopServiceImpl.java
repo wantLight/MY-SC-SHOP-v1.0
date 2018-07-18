@@ -10,6 +10,7 @@ import com.imooc.myo2o.util.ImageUtil;
 import com.imooc.myo2o.vo.ShopExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
 import java.util.Date;
@@ -23,7 +24,7 @@ public class ShopServiceImpl implements ShopService{
     @Autowired
     private ShopDao shopDao;
     @Override
-    public ShopExecution addShop(Shop shop, File shopImg) {
+    public ShopExecution addShop(Shop shop, CommonsMultipartFile shopImg) {
         //各种非空逻辑判断
         if (shop == null){
             return new ShopExecution(ShopStateEnum.NULL_SHOP);
