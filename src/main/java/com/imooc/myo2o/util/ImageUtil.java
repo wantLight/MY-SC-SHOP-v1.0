@@ -2,6 +2,7 @@ package com.imooc.myo2o.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,18 +24,18 @@ public class ImageUtil {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HHmmss");
 
 	//处理缩略图，调用spring自带的文件处理对象CommonsMultipartFile
-	public static String generateThumbnail(File thumbnail, String targetAddr) {
+	public static String generateThumbnail(InputStream thumbnailInputStream,String fileName,String targetAddr) {
 		//生成随机文件名
 		String realFileName = FileUtil.getRandomFileName();
 		//获取扩展名
-		String extension = getFileExtension(thumbnail);
+		String extension = getFileExtension(fileName);
 		//创建生成目录
 		makeDirPath(targetAddr);
 		String relativeAddr = targetAddr + realFileName + extension;
 		File dest = new File(FileUtil.getImgBasePath() + relativeAddr);
 		try {
 			//Thumbnails.of(thumbnail.getInputStream()).size(200, 200).outputQuality(0.25f).toFile(dest);
-			Thumbnails.of(thumbnail)
+			Thumbnails.of(thumbnailInputStream)
 					.size(200,200).watermark(Positions.BOTTOM_RIGHT,
 					ImageIO.read(new File(basePath + "/watermark.jpg")),0.25f)
 					.outputQuality(0.8f).toFile(dest);
@@ -45,28 +46,29 @@ public class ImageUtil {
 		return relativeAddr;
 	}
 
-	public static String generateNormalImg(File thumbnail, String targetAddr) {
+	public static String generateNormalImg(InputStream thumbnailInputStream,String FileName, String targetAddr) {
 		String realFileName = FileUtil.getRandomFileName();
-		String extension = getFileExtension(thumbnail);
+		String extension = getFileExtension(FileName);
 		makeDirPath(targetAddr);
 		String relativeAddr = targetAddr + realFileName + extension;
 		File dest = new File(FileUtil.getImgBasePath() + relativeAddr);
 		try {
-			Thumbnails.of(thumbnail).size(337, 640).outputQuality(0.5f).toFile(dest);
+			Thumbnails.of(thumbnailInputStream).size(337, 640).outputQuality(0.5f).toFile(dest);
 		} catch (IOException e) {
 			throw new RuntimeException("创建缩略图失败：" + e.toString());
 		}
 		return relativeAddr;
 	}
 
-	public static List<String> generateNormalImgs(List<File> imgs, String targetAddr) {
+	public static List<String> generateNormalImgs(List<File> imgs, String imgName,String targetAddr) {
 		int count = 0;
 		List<String> relativeAddrList = new ArrayList<String>();
 		if (imgs != null && imgs.size() > 0) {
 			makeDirPath(targetAddr);
 			for (File img : imgs) {
 				String realFileName = FileUtil.getRandomFileName();
-				String extension = getFileExtension(img);
+				//todo 处理图片名称待修改
+				String extension = getFileExtension(imgName);
 				String relativeAddr = targetAddr + realFileName + count + extension;
 				File dest = new File(FileUtil.getImgBasePath() + relativeAddr);
 				count++;
@@ -93,10 +95,9 @@ public class ImageUtil {
 	}
 
 	//获取文件名的扩展名
-    private static String getFileExtension(File cFile) {
-		String originalFileName = cFile.getName();
+    private static String getFileExtension(String fileName) {
 		//获取.后面的字符
-		return originalFileName.substring(originalFileName.lastIndexOf("."));
+		return fileName.substring(fileName.lastIndexOf("."));
 	}
 
 	//图片打水印并缩小

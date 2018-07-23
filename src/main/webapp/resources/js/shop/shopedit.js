@@ -4,8 +4,8 @@ $(function() {
 
 	var isEdit = shopId ? true : false;
 
-	var shopInfoUrl = '/myo2o/shop/getshopbyid?shopId=1';
-	// var shopInfoUrl = '/myo2o/shop/getshopbyid?shopId=' + shopId;
+	//var shopInfoUrl = '/myo2o/shop/getshopbyid?shopId=1';
+	var shopInfoUrl = '/myo2o/shop/getshopbyid?shopId=' + shopId;
 	var initUrl = '/myo2o/shop/getshopinitinfo';
 	var editShopUrl = '/myo2o/shop/registershop';
 	if (isEdit) {

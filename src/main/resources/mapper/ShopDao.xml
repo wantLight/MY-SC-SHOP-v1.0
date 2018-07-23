@@ -19,6 +19,7 @@
 		<result column="last_edit_time" property="lastEditTime" />
 		<result column="enable_status" property="enableStatus" />
 		<result column="advice" property="advice" />
+		<!-- 定义复合类型-->
 		<association property="area" column="area_id"
 			javaType="com.imooc.myo2o.entity.Area">
 			<id column="area_id" property="areaId" />
@@ -154,7 +155,7 @@
 			</if>
 		</where>
 	</select>
-	<!-- 目的：为dao接口方法提供sql语句配置 -->
+
 	<select id="queryByEmployeeId" resultMap="shopMap"
 		parameterType="Long">
 		<!-- 具体的sql -->

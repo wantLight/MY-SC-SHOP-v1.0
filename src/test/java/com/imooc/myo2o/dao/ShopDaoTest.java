@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.imooc.myo2o.entity.PersonInfo;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class ShopDaoTest extends BaseTest {
 	private ShopDao shopDao;
 
 	@Test
+	@Ignore
 	public void testAInsertShop() throws Exception {
 		Shop shop = new Shop();
 		PersonInfo personInfo = new PersonInfo();

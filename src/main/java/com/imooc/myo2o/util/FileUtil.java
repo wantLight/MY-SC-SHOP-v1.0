@@ -63,10 +63,12 @@ public class FileUtil {
 		return nowTimeStr + rannum;
 	}
 
+	//是文件就删除文件，是路径就删除路径
 	public static void deleteFile(String storePath) {
 		File file = new File(getImgBasePath() + storePath);
 		if (file.exists()) {
 			if (file.isDirectory()) {
+				//它是一个目录
 				File files[] = file.listFiles();
 				for (int i = 0; i < files.length; i++) {
 					files[i].delete();

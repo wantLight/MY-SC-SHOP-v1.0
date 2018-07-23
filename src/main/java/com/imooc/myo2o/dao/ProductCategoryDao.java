@@ -15,7 +15,7 @@ public interface ProductCategoryDao {
 	List<ProductCategory> queryByShopId(long shopId);
 
 	/**
-	 * 新增商品类别
+	 * 批量新增商品类别
 	 * 
 	 * @param ProductCategory
 	 *            productCategory

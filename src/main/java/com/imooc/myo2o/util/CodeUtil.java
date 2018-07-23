@@ -1,7 +1,9 @@
 package com.imooc.myo2o.util;
 
 import javax.servlet.http.HttpServletRequest;
-
+/*
+检查验证码
+ */
 public class CodeUtil {
 	public static boolean checkVerifyCode(HttpServletRequest request) {
 		String verifyCodeExpected = (String) request.getSession().getAttribute(

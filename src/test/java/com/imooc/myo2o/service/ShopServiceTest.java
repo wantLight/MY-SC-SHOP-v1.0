@@ -50,8 +50,8 @@ public class ShopServiceTest extends BaseTest{
         shop.setShopCategoryId(9L);
 
         File shopImg = new File("C:\\Users\\xyzzg\\Desktop\\1");
-        ShopExecution shopExecution =shopService.addShop(shop,shopImg);
-        assertEquals(ShopStateEnum.CHECK.getState(),shopExecution.getState());
+        //ShopExecution shopExecution =shopService.addShop(shop,shopImg);
+        //assertEquals(ShopStateEnum.CHECK.getState(),shopExecution.getState());
 
     }
 }
