@@ -2,6 +2,7 @@ package com.imooc.myo2o.service;
 
 import com.imooc.myo2o.entity.Shop;
 import com.imooc.myo2o.exception.ShopOperationException;
+import com.imooc.myo2o.vo.ImageHolder;
 import com.imooc.myo2o.vo.ShopExecution;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -23,7 +24,7 @@ public interface ShopService {
     ShopExecution getShopList(Shop shop,int pageIndex,int pageSize);
 
     //使用File不合理
-    ShopExecution addShop(Shop shop, InputStream shopImgInputStream,String fileName) throws ShopOperationException;
+    ShopExecution addShop(Shop shop, ImageHolder thumbnail) throws ShopOperationException;
 
     /**
      * 查询指定店铺信息
@@ -36,5 +37,5 @@ public interface ShopService {
     /**
      * 更新店铺信息（从店家角度）
      */
-    ShopExecution modifyShop(Shop shop, InputStream shopImgInputStream,String fileName) throws ShopOperationException;
+    ShopExecution modifyShop(Shop shop, ImageHolder thumbnail) throws ShopOperationException;
 }

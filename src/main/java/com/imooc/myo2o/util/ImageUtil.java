@@ -46,6 +46,8 @@ public class ImageUtil {
 		return relativeAddr;
 	}
 
+	//这里可以替换为ImageHolder
+	//生成图片，并返回相对路径
 	public static String generateNormalImg(InputStream thumbnailInputStream,String FileName, String targetAddr) {
 		String realFileName = FileUtil.getRandomFileName();
 		String extension = getFileExtension(FileName);

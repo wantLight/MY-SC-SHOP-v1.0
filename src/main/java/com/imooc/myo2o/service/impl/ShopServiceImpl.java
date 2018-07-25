@@ -8,6 +8,7 @@ import com.imooc.myo2o.service.ShopService;
 import com.imooc.myo2o.util.FileUtil;
 import com.imooc.myo2o.util.ImageUtil;
 import com.imooc.myo2o.util.PageCalculator;
+import com.imooc.myo2o.vo.ImageHolder;
 import com.imooc.myo2o.vo.ShopExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,7 @@ public class ShopServiceImpl implements ShopService{
     }
 
     @Override
-    public ShopExecution addShop(Shop shop,InputStream shopImgInputStream,String fileName) {
+    public ShopExecution addShop(Shop shop,ImageHolder thumbnail) {
         //各种非空逻辑判断
         if (shop == null){
             return new ShopExecution(ShopStateEnum.NULL_SHOP);
@@ -59,9 +60,9 @@ public class ShopServiceImpl implements ShopService{
                 //只有RuntimeException，事务中止并回滚
                 throw new ShopOperationException("店铺创建失败");
             } else{
-                if (shopImgInputStream != null){
+                if (thumbnail != null){
                     try {
-                        addShopImg(shop,shopImgInputStream,fileName);
+                        addShopImg(shop,thumbnail.getImage(),thumbnail.getImageName());
                     } catch (Exception e){
                         throw new ShopOperationException("addShopImg error:"+e.getMessage());
                     }
@@ -90,18 +91,18 @@ public class ShopServiceImpl implements ShopService{
     }
 
     @Override
-    public ShopExecution modifyShop(Shop shop,InputStream shopImgInputStream,String fileName)
+    public ShopExecution modifyShop(Shop shop,ImageHolder thumbnail)
             throws ShopOperationException {
         if(shop == null || shop.getShopId() == null){
             return new ShopExecution(ShopStateEnum.NULL_SHOP);
         } else{
             //1.判断是否需要处理图片
-            if(shopImgInputStream != null){
+            if(thumbnail.getImage() != null){
                 Shop tempShop = shopDao.queryByShopId(shop.getShopId());
                 if (tempShop.getShopImg() != null){
                     FileUtil.deleteFile(tempShop.getShopImg());
                 }
-                addShopImg(shop, shopImgInputStream, fileName);
+                addShopImg(shop, thumbnail.getImage(), thumbnail.getImageName());
             }
             //2.更新店铺信息
             shop.setLastEditTime(new Date());

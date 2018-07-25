@@ -3,8 +3,7 @@ $(function() {
 	var productUrl = '/myo2o/frontend/listproductdetailpageinfo?productId='
 			+ productId;
 
-	$
-			.getJSON(
+	$.getJSON(
 					productUrl,
 					function(data) {
 						if (data.success) {

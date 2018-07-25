@@ -13,6 +13,7 @@ import com.imooc.myo2o.util.CodeUtil;
 import com.imooc.myo2o.util.FileUtil;
 import com.imooc.myo2o.util.HttpServletRequestUtil;
 import com.imooc.myo2o.util.ImageUtil;
+import com.imooc.myo2o.vo.ImageHolder;
 import com.imooc.myo2o.vo.ShopExecution;
 import com.sun.javafx.scene.shape.PathUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -188,7 +189,8 @@ public class ShopManagementController {
             }*/
             ShopExecution shopExecution;
             try {
-                shopExecution = shopService.addShop(shop,shopImg.getInputStream(),shopImg.getOriginalFilename());
+                ImageHolder imageHolder = new ImageHolder(shopImg.getName(),shopImg.getInputStream());
+                shopExecution = shopService.addShop(shop,imageHolder);
                 if (shopExecution.getState() == ShopStateEnum.CHECK.getState()){
                     modelMap.put("success",true);
                     //该用户可以操作的店铺列表
@@ -250,10 +252,11 @@ public class ShopManagementController {
         if (shop != null && shop.getShopId() != null){
             ShopExecution shopExecution = null;
             try {
+                ImageHolder imageHolder = new ImageHolder(shopImg.getName(),shopImg.getInputStream());
                 if (shopImg == null){
-                    shopExecution = shopService.modifyShop(shop,null,null);
+                    shopExecution = shopService.modifyShop(shop,imageHolder);
                 }else{
-                    shopExecution = shopService.modifyShop(shop,shopImg.getInputStream(),shopImg.getOriginalFilename());
+                    shopExecution = shopService.modifyShop(shop,imageHolder);
                 }
                 if (shopExecution.getState() == ShopStateEnum.SUCCESS.getState()){
                     modelMap.put("success",true);
