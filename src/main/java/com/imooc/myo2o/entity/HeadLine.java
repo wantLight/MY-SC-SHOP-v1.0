@@ -7,6 +7,7 @@ public class HeadLine {
 	private String lineName;
 	private String lineLink;
 	private String lineImg;
+	//优先级
 	private Integer priority;
 	private Integer enableStatus;
 	private Date createTime;

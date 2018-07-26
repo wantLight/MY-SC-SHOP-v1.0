@@ -56,6 +56,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 	@Transactional
 	public ProductCategoryExecution deleteProductCategory(
 			long productCategoryId, long shopId) throws RuntimeException {
+		//解除tb_product里的商品与该productCategoryId的关联
 		try {
 			int effectedNum = productDao
 					.updateProductCategoryToNull(productCategoryId);
@@ -66,6 +67,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 			throw new RuntimeException("deleteProductCategory error: "
 					+ e.getMessage());
 		}
+		//删除productCategory
 		try {
 			int effectedNum = productCategoryDao.deleteProductCategory(
 					productCategoryId, shopId);

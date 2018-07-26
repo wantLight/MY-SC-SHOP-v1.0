@@ -51,6 +51,7 @@ public class ProductManagementController {
 					"currentShop");
 			if ((pageIndex > -1) && (pageSize > -1) && (currentShop != null)
 					&& (currentShop.getShopId() != null)) {
+				//获取需要检索的条件
 				long productCategoryId = HttpServletRequestUtil.getLong(request,
 					"productCategoryId");
 			String productName = HttpServletRequestUtil.getString(request,
@@ -265,12 +266,15 @@ public class ProductManagementController {
 		return modelMap;
 	}
 
+	//整合出查询条件
 	private Product compactProductCondition4Search(long shopId,
 			long productCategoryId, String productName) {
+		//ID是必须的
 		Product productCondition = new Product();
 		Shop shop = new Shop();
 		shop.setShopId(shopId);
 		productCondition.setShop(shop);
+		//有的话就添加到条件里
 		if (productCategoryId != -1L) {
 			ProductCategory productCategory = new ProductCategory();
 			productCategory.setProductCategoryId(productCategoryId);
