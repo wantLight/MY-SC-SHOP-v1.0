@@ -51,7 +51,7 @@ public class ShopCategoryServiceImpl implements ShopCatetoryService{
         ObjectMapper mapper = new ObjectMapper();
         if (!jedisKeys.exists(key)) {
             ShopCategory shopCategoryCondition = new ShopCategory();
-            // 当shopCategoryId不为空的时候，查询的条件会变为 where parent_id is null
+            // shopCategoryId不为空，查询的条件会变为 where parent_id is null
             shopCategoryCondition.setShopCategoryId(-1L);
             shopCategoryList = shopCategoryDao
                     .queryShopCategory(shopCategoryCondition);

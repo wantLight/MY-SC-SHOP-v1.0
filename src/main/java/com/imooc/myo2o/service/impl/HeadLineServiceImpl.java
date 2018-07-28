@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,28 +33,47 @@ public class HeadLineServiceImpl implements HeadLineService {
 	private JedisUtil.Keys jedisKeys;
 	@Autowired
 	private HeadLineDao headLineDao;
+
+	private static Logger logger = LoggerFactory.getLogger(HeadLineServiceImpl.class);
 	private static String HLLISTKEY = "headlinelist";
 
 	@Override
+	@Transactional
 	public List<HeadLine> getHeadLineList(HeadLine headLineCondition)
 			throws IOException {
-		List<HeadLine> headLineList = null;
-		ObjectMapper mapper = new ObjectMapper();
 		String key = HLLISTKEY;
-		if (headLineCondition.getEnableStatus() != null) {
+		List<HeadLine> headLines = null;
+		ObjectMapper objectMapper = new ObjectMapper();
+		//拼接出Readis的key,三种不同的key存
+		if(headLineCondition != null && headLineCondition.getEnableStatus() != null){
 			key = key + "_" + headLineCondition.getEnableStatus();
 		}
-		if (!jedisKeys.exists(key)) {
-			headLineList = headLineDao.queryHeadLine(headLineCondition);
-			String jsonString = mapper.writeValueAsString(headLineList);
-			jedisStrings.set(key, jsonString);
+		String jsonString;
+		if (!jedisKeys.exists(key)){
+			headLines = headLineDao.queryHeadLine(headLineCondition);
+			jsonString = null;
+			try {
+				jsonString = objectMapper.writeValueAsString(headLines);
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+				logger.error(e.getMessage());
+				throw new IOException(e.getMessage());
+			}
+			jedisStrings.set(key,jsonString);
 		} else {
-			String jsonString = jedisStrings.get(key);
-			JavaType javaType = mapper.getTypeFactory()
-					.constructParametricType(ArrayList.class, HeadLine.class);
-			headLineList = mapper.readValue(jsonString, javaType);
+			jsonString = jedisStrings.get(key);
+			//转换， 获取类型的创建工厂
+			JavaType javaType = objectMapper.getTypeFactory().constructParametricType(ArrayList.class,HeadLine.class);
+			try {
+				//（要转换的对象，转换成的对象）
+				headLines = objectMapper.readValue(jsonString,javaType);
+			} catch (IOException e) {
+				e.printStackTrace();
+				logger.error(e.getMessage());
+				throw new IOException(e.getMessage());
+			}
 		}
-		return headLineList;
+		return headLines;
 	}
 
 	@Override

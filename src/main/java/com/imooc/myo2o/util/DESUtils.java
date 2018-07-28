@@ -9,6 +9,9 @@ import javax.crypto.KeyGenerator;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
+/**
+ * DES加密解密
+ */
 public class DESUtils {
 
 	private static Key key;
@@ -35,6 +38,7 @@ public class DESUtils {
 		}
 	}
 
+	//获取加密后的信息
 	public static String getEncryptString(String str) {
 		//基于BASE64编码，接收byte[]并转换成String
 		BASE64Encoder base64encoder = new BASE64Encoder();
@@ -57,12 +61,18 @@ public class DESUtils {
 
 	//获取解密后的信息
 	public static String getDecryptString(String str) {
+		//基于BASE64Decoder编码，接收byte[]并转换成String
 		BASE64Decoder base64decoder = new BASE64Decoder();
 		try {
+			//将字符串decode成byte[]
 			byte[] bytes = base64decoder.decodeBuffer(str);
+			//获取解密对象
 			Cipher cipher = Cipher.getInstance(ALGORITHM);
+			//初始化解密信息
 			cipher.init(Cipher.DECRYPT_MODE, key);
+			//解密
 			byte[] doFinal = cipher.doFinal(bytes);
+			//返回解密后的信息
 			return new String(doFinal, CHARSETNAME);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -70,11 +80,11 @@ public class DESUtils {
 		}
 	}
 	
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		System.out.println(getEncryptString("root"));
-		System.out.println(getEncryptString("230230"));
+		System.out.println(getEncryptString("xyzzg"));
 		System.out.println(getEncryptString("wxd7f6c5b8899fba83"));
 		System.out.println(getEncryptString("665ae80dba31fc91ab6191e7da4d676d"));
-	}*/
+	}
 
 }
