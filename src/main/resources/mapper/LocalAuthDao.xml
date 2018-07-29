@@ -10,6 +10,7 @@
 		<result column="password" property="password" />
 		<result column="create_time" property="createTime" />
 		<result column="last_edit_time" property="lastEditTime" />
+		<!--需要与personInfo做左连接-->
 		<association property="personInfo" column="user_id"
 			javaType="com.imooc.myo2o.entity.PersonInfo">
 			<id column="user_id" property="userId" />
@@ -53,9 +54,7 @@
 		tb_local_auth l
 		LEFT
 		JOIN
-		tb_person_info
-		p ON l.user_id =
-		p.user_id
+		tb_person_info p ON l.user_id = p.user_id
 		WHERE
 		l.user_name =
 		#{userName}

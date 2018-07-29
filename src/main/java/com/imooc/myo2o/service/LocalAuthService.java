@@ -7,14 +7,14 @@ import com.imooc.myo2o.entity.LocalAuth;
 
 public interface LocalAuthService {
 	/**
-	 * 
+	 * 通过账号密码查询平台账号信息
 	 * @param userName
 	 * @return
 	 */
 	LocalAuth getLocalAuthByUserNameAndPwd(String userName,String password);
 
 	/**
-	 * 
+	 * 通过userId获取平台账号信息
 	 * @param userId
 	 * @return
 	 */
@@ -31,7 +31,7 @@ public interface LocalAuthService {
                                 CommonsMultipartFile profileImg) throws RuntimeException;
 
 	/**
-	 * 
+	 * 绑定微信，生成平台专属账号
 	 * @param localAuth
 	 * @return
 	 * @throws RuntimeException
@@ -40,12 +40,11 @@ public interface LocalAuthService {
 			throws RuntimeException;
 
 	/**
-	 * 
-	 * @param localAuthId
+	 * 修改平台账号登陆密码
+	 * @param userId
 	 * @param userName
 	 * @param password
 	 * @param newPassword
-	 * @param lastEditTime
 	 * @return
 	 */
 	LocalAuthExecution modifyLocalAuth(Long userId,String userName,

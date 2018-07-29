@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 public interface LocalAuthDao {
 
 	/**
-	 * 
+	 * 通过账号密码查询对应信息，登陆用
 	 * @param userName
 	 * @param password
 	 * @return

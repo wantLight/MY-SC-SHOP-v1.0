@@ -101,6 +101,7 @@ public class LocalAuthServiceImpl implements LocalAuthService {
 		LocalAuth tempAuth = localAuthDao.queryLocalByUserId(localAuth
 				.getUserId());
 		if (tempAuth != null) {
+			//若果绑定过则推出，保证唯一性
 			return new LocalAuthExecution(LocalAuthStateEnum.ONLY_ONE_ACCOUNT);
 		}
 		try {

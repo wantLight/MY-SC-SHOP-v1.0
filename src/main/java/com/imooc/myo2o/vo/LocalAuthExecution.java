@@ -8,7 +8,6 @@ import com.imooc.myo2o.enums.LocalAuthStateEnum;
 public class LocalAuthExecution {
 	// 结果状态
 	private int state;
-
 	// 状态标识
 	private String stateInfo;
 

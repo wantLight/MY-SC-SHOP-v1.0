@@ -84,7 +84,9 @@ public class ShopManagementController {
             shop.setOwnerId(user.getUserId());
             ShopExecution shopExecution = shopService.getShopList(shop,0,100);
             modelMap.put("shopList",shopExecution.getShopList());
-            modelMap.put(" ",user);
+            //列出店铺列表后，直接将店铺放入session中作为权限验证依赖
+            request.getSession().setAttribute("shopList",shopExecution.getShopList());
+            modelMap.put("user",user);
             modelMap.put("success",true);
         } catch (Exception e){
             modelMap.put("success",false);
