@@ -13,9 +13,13 @@ public class UserAwardMap {
 	private Date expireTime;
 	private Date createTime;
 	private Integer usedStatus;
+	//领取奖品所消耗积分
 	private Integer point;
+	//操作员信息实体类
 	private PersonInfo user;
+	//奖品信息
 	private Award award;
+	//店铺
 	private Shop shop;
 
 	public Long getUserAwardId() {

@@ -2,6 +2,7 @@ package com.imooc.myo2o.entity;
 
 import java.util.Date;
 
+//店铺积分
 public class UserShopMap {
 	private Long userShopId;
 	private Long userId;

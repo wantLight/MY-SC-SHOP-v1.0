@@ -2,7 +2,9 @@ package com.imooc.myo2o.entity;
 
 import java.util.Date;
 
+//奖品
 public class Award {
+	//主键Id
 	private Long awardId;
 	private String awardName;
 	private String awardDesc;
@@ -13,6 +15,7 @@ public class Award {
 	private Date expireTime;
 	private Date lastEditTime;
 	private Integer enableStatus;
+	//属于哪个店铺
 	private Long shopId;
 
 	public Long getAwardId() {

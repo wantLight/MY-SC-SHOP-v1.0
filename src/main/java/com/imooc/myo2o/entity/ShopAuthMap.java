@@ -2,6 +2,7 @@ package com.imooc.myo2o.entity;
 
 import java.util.Date;
 
+//店铺授权
 public class ShopAuthMap {
 
 	private Long shopAuthId;
@@ -9,11 +10,14 @@ public class ShopAuthMap {
 	private Long shopId;
 	private String name;
 	private String title;
+	//职称符号（保留字段）
 	private Integer titleFlag;
 	private Integer enableStatus;
 	private Date createTime;
 	private Date lastEditTime;
+	//员工
 	private PersonInfo employee;
+	//店铺实体
 	private Shop shop;
 
 	public Long getShopAuthId() {

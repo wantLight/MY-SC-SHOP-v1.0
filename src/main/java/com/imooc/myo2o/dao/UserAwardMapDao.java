@@ -5,6 +5,7 @@ import java.util.List;
 import com.imooc.myo2o.entity.UserAwardMap;
 import org.apache.ibatis.annotations.Param;
 
+//顾客已领取奖品的映射
 public interface UserAwardMapDao {
 	/**
 	 * 

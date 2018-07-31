@@ -20,6 +20,7 @@ public class Product implements Serializable{
 	private Date createTime;
 	private Date lastEditTime;
 	private Integer enableStatus;
+	//商品积分
 	private Integer point;
 
 	private List<ProductImg> productImgList;
