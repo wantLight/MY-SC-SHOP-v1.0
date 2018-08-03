@@ -5,7 +5,7 @@
 	<!-- TRACE<DEBUG<INFO<WARN<ERROR-->
 	<!-- logger.trace("msg") logger.debug-->
 	<property name="log.level" value="debug"/>
-    <property name="log.maxHistory" value="30"/>
+	<property name="log.maxHistory" value="30"/>
 	<property name="log.filePath" value="${catalina.base}/logs/webapps"/>
 	<property name="log.pattern"
 			  value="%d{yyyy-MM-dd HH:mm:ss.SSS}[%thread]%-5level%logger{50}-%msg%n"/>
@@ -16,7 +16,7 @@
 		</encoder>
 	</appender>
 	<!-- DEBUG-->
-	<appender name="dabugAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="debugAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<!-- 文件路劲-->
 		<file>${log.filePath}/debug.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -83,7 +83,7 @@
 	</logger>
 
 	<root level="info">
-		<appender-ref ref="consoleAppender" />
+		<appender-ref ref="consoleAppnder" />
 	</root>
 
 </configuration>
